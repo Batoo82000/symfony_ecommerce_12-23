@@ -25,8 +25,8 @@ class Category
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private ?array $imageUrls = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageUrl = null;
 
     #[ORM\Column(nullable: true)]
     private ?bool $isMega = null;
@@ -42,14 +42,19 @@ class Category
 
     public function __construct()
     {
-        $this->setCreatedAt(new \DateTimeImmutable());
+        $this->setCreatedAt(new \DateTimeImmutable()); // Crée automatiquement une date de créaton à la validation du formulaire
         $this->products = new ArrayCollection();
+    }
+    public function __toString() // transforme une valeur en chaîne de caractères exploitable, par exemple, dans le formulaire products.
+    {
+        return $this->name;
     }
 
     public function getId(): ?int
     {
         return $this->id;
     }
+
 
     public function getName(): ?string
     {
@@ -87,14 +92,14 @@ class Category
         return $this;
     }
 
-    public function getImageUrls(): ?array
+    public function getImageUrl(): ?string
     {
-        return $this->imageUrls;
+        return $this->imageUrl;
     }
 
-    public function setImageUrls(?array $imageUrls): static
+    public function setImageUrl(?string $imageUrl): static
     {
-        $this->imageUrls = $imageUrls;
+        $this->imageUrl = $imageUrl;
 
         return $this;
     }
