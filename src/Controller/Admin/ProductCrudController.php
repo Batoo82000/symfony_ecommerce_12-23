@@ -33,7 +33,6 @@ class ProductCrudController extends AbstractCrudController
             ->add(Crud::PAGE_INDEX, Action::DETAIL) // Dans la partie index de category dans le dashboard, fait apparaitre un bouton "show"
             ;   
     }
-
     
     public function configureFields(string $pageName): iterable
     {
@@ -50,12 +49,13 @@ class ProductCrudController extends AbstractCrudController
             ->setFormTypeOptions([
                 "multiple" => true, //Indique que le champs peut accueillir plusieurs fichiers en upload
                 "attr"=> [
-                    "accept"=>"image/x-png, image/gif, image/jpeg, image/jpg" //On choisi le typage des fichiers que l'on peux uploader
+                    "accept"=>"image/x-png, image/gif, image/jpeg, image/jpg, image/webp" //On choisi le typage des fichiers que l'on peut uploader
                 ]
             ])
             ->setBasePath("assets/images/products")
             ->setUploadDir("/public/assets/images/products")
-            ->setUploadedFileNamePattern('[slug]-[randomhash].[extension]'),// Renome le fichier selon un schéma selon ce qui est indiqué entre parenthèse, ici, on récupère le slug et on le concatène avec le timestamp tout en gardant l'extension.
+            ->setUploadedFileNamePattern('[slug]-[randomhash].[extension]')// Renome le fichier selon un schéma selon ce qui est indiqué entre parenthèse, ici, on récupère le slug et on le concatène avec le hash randomisé du fichier tout en gardant l'extension.
+            ->setRequired($pageName === Crud::PAGE_NEW),// Oblige à la création uniquement, à fournir une ou des images
             MoneyField::new('regular_price')->setCurrency('EUR'),
             MoneyField::new('solde_price')->setCurrency('EUR'),
             IntegerField::new('stock'),
@@ -65,6 +65,5 @@ class ProductCrudController extends AbstractCrudController
             BooleanField::new('isFeatured'),
             BooleanField::new('IsSpecialOffer'),
         ];
-    }
-    
+    }    
 }

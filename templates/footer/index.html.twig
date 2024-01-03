@@ -5,10 +5,9 @@
                 <div  class="col-lg-3 col-md-6 col-sm-12">
                     <div  class="widget">
                         <div  class="footer_logo"><a  href="#">
-                                <h2 >Jstore</h2>
+                                <h2 >{{app.session.get("setting").WebsiteName}}</h2>{# Affiche le nom du magasin stocké dans l'entité Setting qui est stocké dans le cookie de session #}
                             </a></div>
-                        <p > Retrouvez tous les accessoires et habits pour femmes, jeunes
-                            filles etc... </p>
+                        <p > {{app.session.get("setting").Description}}</p>{# Affiche la description du magasin stocké dans l'entité Setting qui est stocké dans le cookie de session #}
                     </div>
                     <div  class="widget">
                         <ul  class="social_icons social_white">
@@ -86,13 +85,13 @@
                         <ul  class="contact_info contact_info_light">
                             <li ><i 
                                     class="ti-location-pin"></i>
-                                <p >21 Rue Rubens 59800 Lille</p>
+                                <p >{{app.session.get("setting").Description}}</p>
                             </li>
                             <li ><i  class="ti-email"></i><a
                                      href="mailto:contact@jstore.fr">contact@jstore.fr</a>
                             </li>
                             <li ><i  class="ti-mobile"></i>
-                                <p >+33 7 49 31 69 74</p>
+                                <p >{{app.session.get("setting").Street}} {{app.session.get("setting").CodePostal}} {{app.session.get("setting").city}} {{app.session.get("setting").statE | default('Espagne')}}</p>
                             </li>
                         </ul>
                     </div>

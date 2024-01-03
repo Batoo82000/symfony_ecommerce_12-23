@@ -42,7 +42,7 @@ class CategoryCrudController extends AbstractCrudController
             ImageField::new('imageUrl') // Permet l'upload vers un dossier d'une image + mise en bdd du chemin de l'image
             ->setFormTypeOptions([
                 "attr"=> [
-                    "accept"=>"image/x-png, image/gif, image/jpeg, image/jpg"
+                    "accept"=>"image/x-png, image/gif, image/jpeg, image/jpg, image/webp"
                 ]
             ])
             ->setBasePath("assets/images/categories")

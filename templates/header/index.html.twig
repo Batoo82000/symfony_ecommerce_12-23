@@ -43,7 +43,7 @@
                         </div>
                         <ul  class="contact_detail text-center text-lg-start">
                             <li ><i  class="ti-mobile"></i><span
-                                    >+33 7 49 31 69 74</span></li>
+                                    >{{app.session.get("setting").PhoneNumber}}</span></li>
                         </ul>
                     </div>
                 </div>
@@ -99,7 +99,9 @@
         <div  class="container">
             <nav  class="navbar navbar-expand-lg"><a 
                     routerlink="/" class="navbar-brand" ng-reflect-router-link="/" href="/">
-                    <h2 >Jstore</h2>
+                    <h2>
+                        {{app.session.get("setting").WebsiteName}} {# Affiche le nom du magasin stocké dans l'entité Setting qui est stocké dans le cookie de session #}
+                    </h2>
                 </a><button  type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-expanded="false"
                     class="navbar-toggler collapsed"><span 
