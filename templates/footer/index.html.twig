@@ -5,25 +5,23 @@
                 <div  class="col-lg-3 col-md-6 col-sm-12">
                     <div  class="widget">
                         <div  class="footer_logo"><a  href="#">
-                                <h2 >{{app.session.get("setting").WebsiteName}}</h2>{# Affiche le nom du magasin stocké dans l'entité Setting qui est stocké dans le cookie de session #}
+                                <h2 >{{app.session.get("setting").WebsiteName | default('IDDEES default')}}</h2>{# Affiche le nom du magasin stocké dans l'entité Setting qui est stocké dans le cookie de session #}
                             </a></div>
-                        <p > {{app.session.get("setting").Description}}</p>{# Affiche la description du magasin stocké dans l'entité Setting qui est stocké dans le cookie de session #}
+                        <p > {{app.session.get("setting").Description | default('Description par default')}}</p>{# Affiche la description du magasin stocké dans l'entité Setting qui est stocké dans le cookie de session #}
                     </div>
                     <div  class="widget">
                         <ul  class="social_icons social_white">
                             <li ><a  target="_blank"
-                                    href="https://facebook.com"><i 
-                                        class="ion-social-facebook"></i></a>
-                            </li>
-                            <li ></li>
-                            <li ></li>
-                            <li ><a  target="_blank"
-                                    href="https://www.youtube.com/channel/UCkqALrIVPEyGnnbmiFl3lQA/?sub_confirmation=1"><i
-                                         class="ion-social-youtube-outline"></i></a>
+                                    href="{{app.session.get("setting").facebookLink | default('https://www.facebook.com')}}">{# Paramètre le lien pour accéder à la page Facebook dont l'adresse est stockée dans le cookie de session #}
+                                    <i class="ion-social-facebook"></i></a>
                             </li>
                             <li ><a  target="_blank"
-                                    href="https://www.instagram.com/mudey_formation/"><i 
-                                        class="ion-social-instagram-outline"></i></a>
+                                    href="{{app.session.get("setting").youtubeLink | default('https://www.youtube.com')}}">{# Paramètre le lien pour accéder à la chaîne Youtube dont l'adresse est stockée dans le cookie de session #}
+                                    <i class="ion-social-youtube-outline"></i></a>
+                            </li>
+                            <li ><a  target="_blank"
+                                    href="{{app.session.get("setting").instagramLink | default('https://www.instagram.com')}}">{# Paramètre le lien pour accéder à la page Facebook dont l'adresse est stockée dans le cookie de session #}
+                                    <i class="ion-social-instagram-outline"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -85,13 +83,13 @@
                         <ul  class="contact_info contact_info_light">
                             <li ><i 
                                     class="ti-location-pin"></i>
-                                <p >{{app.session.get("setting").Description}}</p>
+                                <p >{{app.session.get("setting").Description | default('Description par default')}}</p>
                             </li>
                             <li ><i  class="ti-email"></i><a
                                      href="mailto:contact@jstore.fr">contact@jstore.fr</a>
                             </li>
                             <li ><i  class="ti-mobile"></i>
-                                <p >{{app.session.get("setting").Street}} {{app.session.get("setting").CodePostal}} {{app.session.get("setting").city}} {{app.session.get("setting").statE | default('Espagne')}}</p>
+                                <p >{{app.session.get("setting").Street | default('37 Rue Voltaire default')}} {{app.session.get("setting").CodePostal | default('82000 default')}} {{app.session.get("setting").city | default('Montauban default')}} {{app.session.get("setting").state | default('France default')}}</p>
                             </li>
                         </ul>
                     </div>

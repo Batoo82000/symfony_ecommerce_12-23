@@ -49,6 +49,15 @@ class Setting
     #[ORM\Column(length: 14, nullable: true)]
     private ?string $phone_number = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $facebookLink = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $youtubeLink = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $instagramLink = null;
+
     public function __construct()
     {
         $this->setCreatedAt(new \DateTimeImmutable());
@@ -199,6 +208,42 @@ class Setting
     public function setPhoneNumber(string $phone_number): static
     {
         $this->phone_number = $phone_number;
+
+        return $this;
+    }
+
+    public function getFacebookLink(): ?string
+    {
+        return $this->facebookLink;
+    }
+
+    public function setFacebookLink(?string $facebookLink): static
+    {
+        $this->facebookLink = $facebookLink;
+
+        return $this;
+    }
+
+    public function getYoutubeLink(): ?string
+    {
+        return $this->youtubeLink;
+    }
+
+    public function setYoutubeLink(?string $youtubeLink): static
+    {
+        $this->youtubeLink = $youtubeLink;
+
+        return $this;
+    }
+
+    public function getInstagramLink(): ?string
+    {
+        return $this->instagramLink;
+    }
+
+    public function setInstagramLink(?string $instagramLink): static
+    {
+        $this->instagramLink = $instagramLink;
 
         return $this;
     }
