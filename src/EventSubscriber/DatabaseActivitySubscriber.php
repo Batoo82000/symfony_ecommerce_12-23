@@ -4,7 +4,9 @@ namespace App\EventSubscriber;
 
 use App\Entity\Product;
 use App\Entity\Setting;
+use App\Entity\Sliders;
 use App\Entity\Category;
+use App\Entity\Collections;
 use Doctrine\ORM\Events;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\PostRemoveEventArgs;
@@ -45,7 +47,7 @@ class DatabaseActivitySubscriber implements EventSubscriber
 
         // Si l'entité est une instance de Product et l'action est "remove"
         if(($entity instanceof Product) && $action === "remove"){
-            // Supprime les images associées au produit.
+            // Supprime les images associées à Product.
             $imageUrls = $entity->getImagesUrls();
 
             foreach ($imageUrls as $imageUrl) {
@@ -56,15 +58,30 @@ class DatabaseActivitySubscriber implements EventSubscriber
 
         // Si l'entité est une instance de Category et l'action est "remove"
         if(($entity instanceof Category) && $action === "remove"){
-            // Supprime l'image associée à la catégorie.
+            // Supprime l'image associée à Category.
             $filename = $entity->getImageUrl();
             $filelink = $this->rootDir. "/public/assets/images/categories/".$filename;
             $this->deleteImage($filelink);
         }
+        // Si l'entité est une instance de Setting et l'action est "remove"
         if(($entity instanceof Setting) && $action === "remove"){
-            // Supprime l'image associée à la catégorie.
+            // Supprime l'image associée à Setting.
             $filename = $entity->getLogo();
             $filelink = $this->rootDir. "/public/assets/images/setting/".$filename;
+            $this->deleteImage($filelink);
+        }
+        // Si l'entité est une instance de Sliders et l'action est "remove"
+        if(($entity instanceof Sliders) && $action === "remove"){
+            // Supprime l'image associée à Sliders.
+            $filename = $entity->getImageUrl();
+            $filelink = $this->rootDir. "/public/assets/images/sliders/".$filename;
+            $this->deleteImage($filelink);
+        }
+        // Si l'entité est une instance de Collections et l'action est "remove"
+        if(($entity instanceof Collections) && $action === "remove"){
+            // Supprime l'image associée à Collections.
+            $filename = $entity->getImageUrl();
+            $filelink = $this->rootDir. "/public/assets/images/sliders/".$filename;
             $this->deleteImage($filelink);
         }
     }

@@ -116,26 +116,19 @@
                                 aria-expanded="false">Pages</a>
                             <div  class="dropdown-menu">
                                 <ul >
-                                    <li ><a 
-                                            class="dropdown-item nav-link nav_item"
-                                            href="/about">About Us</a></li>
-                                    <li ><a 
-                                            class="dropdown-item nav-link nav_item"
-                                            href="/contact">Contact Us</a></li>
-                                    <li ><a 
-                                            class="dropdown-item nav-link nav_item"
-                                            href="/fqa">Faq</a></li>
-                                    
+                                {# partie dynamique du menu avec gestion des infos de contact, à propos, mention légale, etc... #}
+                                {# -------------------------------------------------------------------------------------------- #}
+                                    {% for page in app.session.get("pagesHeader") %}
                                     <li >
-                                        <a class="dropdown-item nav-link nav_item" href="/login">Login</a>
+                                        <a class="dropdown-item nav-link nav_item"
+                                           href="/pages/{{page.slug}}">
+                                           {{page.title}}
+                                        </a>
                                     </li>
+                                    {% endfor %}
+                                {# -------------------------------------------------------------------------------------------- #}
+                                {# partie dynamique du menu avec gestion des infos de contact, à propos, mention légale, etc... #}
 
-                                    <li ><a 
-                                            class="dropdown-item nav-link nav_item"
-                                            href="/register">Register</a></li>
-                                    <li ><a 
-                                            class="dropdown-item nav-link nav_item"
-                                            href="/terms">Terms and Conditions</a></li>
                                 </ul>
                             </div>
                         </li>

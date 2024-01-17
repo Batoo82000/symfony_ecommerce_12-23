@@ -2,12 +2,15 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\User;
-use App\Entity\Product;
 use App\Entity\Category;
-use Symfony\Component\HttpFoundation\Response;
-use App\Controller\Admin\ProductCrudController;
+use App\Entity\Product;
 use App\Entity\Setting;
+use App\Entity\Sliders;
+use App\Entity\User;
+use App\Controller\Admin\ProductCrudController;
+use App\Entity\Collections;
+use App\Entity\Pages;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -48,8 +51,11 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Products', 'fas fa-list', Product::class);
+        yield MenuItem::linkToCrud('Collections', 'fas fa-folder-open', Collections::class);
         yield MenuItem::linkToCrud('Category', 'fas fa-tag', Category::class);
+        yield MenuItem::linkToCrud('Sliders', 'fas fa-image', Sliders::class);
         yield MenuItem::linkToCrud('Users', 'fas fa-users', User::class);
+        yield MenuItem::linkToCrud('Pages', 'fas fa-file', Pages::class);
         yield MenuItem::linkToCrud('Settings', 'fas fa-gear', Setting::class);
     }
 }
