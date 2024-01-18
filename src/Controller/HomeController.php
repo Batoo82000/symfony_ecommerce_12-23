@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Repository\CategoryRepository;
 use App\Repository\CollectionsRepository;
 use App\Repository\PagesRepository;
+use App\Repository\ProductRepository;
 use App\Repository\SettingRepository;
 use App\Repository\SlidersRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,13 +15,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
+    private $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
     #[Route('/', name: 'app_home')]
     // Cette annotation Symfony déclare une route pour l'URL '/' avec le nom 'app_home'.
     // Lorsque quelqu'un accède à l'URL '/', la méthode 'index' de ce contrôleur sera appelée.
     public function index(
         SettingRepository $settingRepository,
         SlidersRepository $slidersRepository, 
-        CollectionsRepository $collectionsRepository, 
+        CollectionsRepository $collectionsRepository,
+        CategoryRepository $categoryRepository,
         PagesRepository $pagesRepository,
         Request $request): Response
     {
@@ -52,14 +62,28 @@ class HomeController extends AbstractController
         $session->set("pagesHeader", $pagesHeader);
         // Stocke les pages ayant isFooter à true dans la session sous la clé 'pagesFooter'.
         $session->set("pagesFooter", $pagesFooter);
+        
+        // Stocke les pages ayant isMega à true dans la session sous la clé 'categoriesMega'.
+        $categoriesMega = $categoryRepository->findBy(['isMega' => true]);
+        $session->set("categoriesMega", $categoriesMega);
+
+        // Récupère les produits avec les valeurs booléennes correspondantes à true
+        $productsBestSeller = $this->productRepository->findBy(['isBestSeller' => true]);
+        $productsNewArrival = $this->productRepository->findBy(['isNewArrival' => true]);
+        $productsFeatured = $this->productRepository->findBy(['isFeatured' => true]);
+        $productsSpecialOffer = $this->productRepository->findBy(['IsSpecialOffer' => true]);
 
 
         // Rend la vue associée à ce contrôleur. Ici, 'home/index.html.twig'.
-        // Les données passées à la vue incluent le nom du contrôleur ('HomeController'), les données de $sliders et de $selectedCollections.
+        // Les données passées à la vue incluent le nom du contrôleur ('HomeController'), les données de $sliders, $selectedCollections, et des produits.
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'sliders' => $sliders,
             'collections' => $selectedCollections,
+            'productsBestSeller' => $productsBestSeller,
+            'productsNewArrival'=> $productsNewArrival,
+            'productsFeatured' => $productsFeatured,
+            'productsSpecialOffer' => $productsSpecialOffer
         ]);
     }
 }

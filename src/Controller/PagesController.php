@@ -13,7 +13,12 @@ class PagesController extends AbstractController
     public function index(string $slug, PagesRepository $pagesRepository): Response
     {
         $pages = $pagesRepository->findOneBy(["slug"=>$slug]);
-
+        
+        if(!$pages){
+            return $this->render('pages/not-found-404.html.twig', [
+                'controller_name' => 'PagesController',
+            ]);
+        }
 
         return $this->render('pages/index.html.twig', [
             'controller_name' => 'PagesController',

@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 
 class SettingCrudController extends AbstractCrudController
 {
@@ -54,9 +55,11 @@ class SettingCrudController extends AbstractCrudController
                     ->setUploadDir("/public/assets/images/setting")
                     ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]')
                     ->setRequired($pageName === Crud::PAGE_NEW),
+            EmailField::new('email')->hideOnIndex(),
             TextField::new('facebookLink')->hideOnIndex(),
             TextField::new('youtubeLink')->hideOnIndex(),
             TextField::new('instagramLink')->hideOnIndex(),
+            TextField::new('copyright')->hideOnIndex(),
             TextField::new('street'),
             TextField::new('city'),
             TextField::new('code_postal'),

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{ pages.title | default ('Page par défaut') }} {% endblock %}
+{% block title %}IDDEES {{ pages.title | default ('Page par défaut') }} {% endblock %}
 
 {% block body %}
 
@@ -9,7 +9,7 @@
 <div class="main_content">
         <div class="section">
             <div class="container">
-            {# Ici, il est important de passer en premier filtre default puis raw, sinon, ça ne fonctionne pas #}
+            {# Ici, il est important de passer en premier le filtre default puis raw, sinon, ça ne fonctionne pas #}
                 {{ pages.content | default ('Veuillez insérer un contenu') | raw  }}
             </div>
         </div>

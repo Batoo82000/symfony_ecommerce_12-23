@@ -80,7 +80,7 @@
                                 <p >{{app.session.get("setting").Description | default('Description par default')}}</p>
                             </li>
                             <li ><i  class="ti-email"></i><a
-                                     href="mailto:contact@jstore.fr">contact@jstore.fr</a>
+                                     href="mailto:{{app.session.get("setting").email}}">{{app.session.get("setting").email}}</a>
                             </li>
                             <li ><i  class="ti-mobile"></i>
                                 <p >{{app.session.get("setting").Street | default('37 Rue Voltaire default')}} {{app.session.get("setting").CodePostal | default('82000 default')}} {{app.session.get("setting").city | default('Montauban default')}} {{app.session.get("setting").state | default('France default')}}</p>
@@ -95,8 +95,7 @@
         <div  class="container">
             <div  class="row">
                 <div  class="col-md-6">
-                    <p  class="mb-md-0 text-center text-md-start"> © 2023 All Rights
-                        Reserved by Espero-Soft Informatiques </p>
+                    <p  class="mb-md-0 text-center text-md-start"> © {{app.session.get("setting").copyright}} </p>
                 </div>
                 <div  class="col-md-6">
                     <ul 
