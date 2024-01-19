@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
-use App\Repository\CategoryRepository;
-use App\Repository\CollectionsRepository;
+use App\Entity\Category;
 use App\Repository\PagesRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SettingRepository;
 use App\Repository\SlidersRepository;
+use App\Repository\CategoryRepository;
+use App\Repository\CollectionsRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -65,6 +68,7 @@ class HomeController extends AbstractController
         
         // Stocke les pages ayant isMega à true dans la session sous la clé 'categoriesMega'.
         $categoriesMega = $categoryRepository->findBy(['isMega' => true]);
+
         $session->set("categoriesMega", $categoriesMega);
 
         // Récupère les produits avec les valeurs booléennes correspondantes à true
@@ -83,7 +87,7 @@ class HomeController extends AbstractController
             'productsBestSeller' => $productsBestSeller,
             'productsNewArrival'=> $productsNewArrival,
             'productsFeatured' => $productsFeatured,
-            'productsSpecialOffer' => $productsSpecialOffer
+            'productsSpecialOffer' => $productsSpecialOffer,
         ]);
     }
 }
