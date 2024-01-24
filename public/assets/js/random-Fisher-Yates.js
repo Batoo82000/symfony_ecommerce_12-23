@@ -1,7 +1,7 @@
 
 // Code JavaScript pour mélanger les produits dans chaque liste
 document.addEventListener("DOMContentLoaded", function() { // Attend que le DOM soit entièrement chargé avant d'exécuter le code JavaScript.
-    let randomProductsLists = document.querySelectorAll('.random-products-list');//Sélectionne toutes les listes de produits aléatoires
+    let randomProductsLists = document.querySelectorAll('.random-list');//Sélectionne toutes les listes de produits aléatoires
 
     randomProductsLists.forEach(function(list) { // itère sur chaque liste
         let products = Array.from(list.children); // Convertit les enfants de la liste en un tableau pour faciliter le mélange.

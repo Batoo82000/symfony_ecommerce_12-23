@@ -1,13 +1,13 @@
 <div class="col-lg-3 col-md-4 col-6">
 	<div class="product">
 		<div class="product_img">
-			<a href="shop-product-detail.html">
+			<a href="/product/{{product.slug}}">
 				<img alt="product_img1" src="/assets/images/products/{{ product.imagesUrls[0]}}">
 			</a>
 			<div class="product_action_box">
 				<ul class="list_none pr_action_btn">
 					<li class="add-to-cart">
-						<a href="#">
+						<a href="/cart/add/{{ product.id }}/1">
 							<i class="icon-basket-loaded"></i>
 							Add To Cart
 						</a>
@@ -32,24 +32,15 @@
 		</div>
 		<div class="product_info">
 			<h6 class="product_title">
-				<a href="/product/bikini-unicolore-ctel-shop">
-					{{product.name}}</a>
+				<a href="/product/{{product.slug}}">
+					{{product.name}}
+				</a>
 			</h6>
 			<div class="product_price">
-				<span class="price">{{ product.soldePrice/100}}</span>
-				<del>{{ product.regularPrice/100 }}</del>
+				<span class="price">{{ (product.soldePrice/100) | format_currency('EUR') }}</span>
+				<del>{{ (product.regularPrice/100)  | format_currency('EUR') }}</del>
 				<div class="on_sale">
-					<span>
-						{% if product.regularPrice is defined and product.soldePrice is defined and product.regularPrice > 0 %}
-							{# Calcul du pourcentage de réduction #}
-							{% set reductionPercentage = ((product.regularPrice - product.soldePrice) / product.regularPrice) * 100 %}
-							{# Affichage du pourcentage de réduction #}
-							<p>Remise :
-								{{ reductionPercentage | number_format(0) }}%</p>
-						{% else %}
-							<p></p>
-						{% endif %}
-					</span>
+					<span>{{((product.regularPrice - product.soldePrice)*100/ product.regularPrice) |number_format(0, '.', ',') }}% Off</span>
 				</div>
 			</div>
 			<div class="rating_wrap">
@@ -59,9 +50,10 @@
 				<span class="rating_num">(21)</span>
 			</div>
 			<div class="pr_desc">
-				<p>Lorem ipsum dolor sit amet,
-				consectetur adipiscing elit. Phasellus blandit massa enim.
-				Nullam id varius nunc id varius nunc.
+				<p>
+					Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Phasellus blandit massa enim.
+					Nullam id varius nunc id varius nunc.
 				</p>
 			</div>
 			<div class="pr_switch_wrap">
@@ -73,4 +65,5 @@
 			</div>
 		</div>
 	</div>
+
 </div>

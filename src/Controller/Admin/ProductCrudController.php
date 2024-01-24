@@ -43,8 +43,9 @@ class ProductCrudController extends AbstractCrudController
             SlugField::new('slug')->setTargetFieldName('name'),
             AssociationField::new('categories'), // Ici on récupère le 'name' de l'entité catégory
             TextField::new('description'),
-            TextEditorField::new('more_description'),
-            TextEditorField::new('additional_infos'),
+            TextEditorField::new('more_description')->HideOnIndex(),
+            TextEditorField::new('additional_infos')->HideOnIndex(),
+            AssociationField::new('relatedProducts')->HideOnIndex(),
             ImageField::new('imagesUrls') // Permet l'upload vers un dossier d'une image + mise en bdd du chemin de l'image
             ->setFormTypeOptions([
                 "multiple" => true, //Indique que le champs peut accueillir plusieurs fichiers en upload

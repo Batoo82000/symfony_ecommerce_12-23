@@ -146,13 +146,16 @@
 							<a href="#" data-bs-toggle="dropdown" class="dropdown-toggle nav-link" aria-expanded="false">Products</a>
 							<div class="dropdown-menu">
 								<ul class="mega-menu d-lg-flex">
+
+									{# boucle permettant d'afficher les categories stockées dans le coockie de session #}
+									{# ------------------------------------------------------------------------------- #}
 									{% for category in app.session.get("categoriesMega") %}
 										<li class="mega-menu-col col-lg-3">
 											<ul>
 												<li class="dropdown-header">
 													{{ category.name }}
 												</li>
-												<li class="random-products-list">
+												<li class="random-list"> {# li relié à un script js qui mélange les products #}
 													{% for product in category.products|slice(0, 3) %}
 														<a class="dropdown-item nav-link nav_item" href="/product/{{ product.slug }}">
 															<img src="/assets/images/products/{{ product.imagesUrls[0] }}" alt="{{ product.name }}" width="30" height="30">
@@ -163,38 +166,26 @@
 											</ul>
 										</li>
 									{% endfor %}
+									{# ------------------------------------------------------------------------------- #}
+									{# boucle permettant d'afficher les categories stockées dans le coockie de session #}
+
 								</ul>
 								<div class="d-lg-flex menu_banners row g-3 px-3">
+
+									{% for collection in app.session.get("isCollectionsMega") %}
+										
 									<div class="col-sm-4">
-										<div class="header-banner"><img alt="menu_banner1" src="/assets/files/megaCollection/11736749706614988691774027121876766721152610541684827357419.png">
+										<div class="header-banner"><img alt="menu_banner1" src="/assets/images/collections/{{ collection.imageUrl }}">
 											<div class="banne_info">
-												<h6>10% Off</h6>
-												<h4>New Arrival</h4>
-												<a href="http://localhost:4300/">Shop
-													                                                    Now</a>
+												<h6>{{ collection.description }}</h6>
+												<h4>{{ collection.title }}</h4>
+												<a href="{{ collection.buttonLink }}">{{ collection.buttonText }}</a>
 											</div>
 										</div>
 									</div>
-									<div class="col-sm-4">
-										<div class="header-banner"><img alt="menu_banner1" src="/assets/files/megaCollection/8932488097310286313588503554459963159142614451684826970123.png">
-											<div class="banne_info">
-												<h6>15% Off</h6>
-												<h4>Men's Fashion</h4>
-												<a href="http://localhost:4300/">Shop
-													                                                    Now</a>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="header-banner"><img alt="menu_banner1" src="/assets/files/megaCollection/1412527185807988177642011518607795945067036381684827015102.png">
-											<div class="banne_info">
-												<h6>23% Off</h6>
-												<h4>Kids Fashion</h4>
-												<a href="http://localhost:4300/">Shop
-													                                                    Now</a>
-											</div>
-										</div>
-									</div>
+
+									{% endfor %}
+
 								</div>
 							</div>
 						</li>

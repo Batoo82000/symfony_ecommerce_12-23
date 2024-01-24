@@ -1,35 +1,34 @@
+import {
+  formatPrice,
+  displayCompare,
+  addCompareEventListener,
+  addFlashMessage,
+  fetchData,
+  manageCartLink,
+  addCartEventListenerToLink,
+  initCart,
+  updateHeaderCart,
+  manageCompareLink,
+} from "./library.js";
 
-import { formatPrice,
-    displayCompare,
-    addCompareEventListener,
-     addFlashMessage,
-     fetchData, 
-     manageCartLink, 
-     addCartEventListenerToLink,
-     initCart,
-     updateHeaderCart,
-     manageCompareLink} from './library.js';
+window.onload = () => {
+  console.log("cart");
 
-window.onload = () =>{
-    
-    console.log("cart");
+  let mainContent = document.querySelector(".main_content");
 
-    let mainContent = document.querySelector('.main_content')
+  let cart = JSON.parse(mainContent?.dataset?.cart || false);
 
-    let cart = JSON.parse(mainContent?.dataset?.cart || false)
-    
-    initCart(cart)
+  initCart(cart);
 
-    updateHeaderCart(cart)
-    
-    console.log("compare");
+  updateHeaderCart(cart);
 
-    mainContent = document.querySelector('.compare_container')
+  console.log("compare");
 
-    let compare = JSON.parse(mainContent?.dataset?.compare || false)
+  mainContent = document.querySelector(".compare_container");
 
-    addCompareEventListener()
-    
-    displayCompare(compare)
+  let compare = JSON.parse(mainContent?.dataset?.compare || false);
 
-}
+  addCompareEventListener();
+
+  displayCompare(compare);
+};

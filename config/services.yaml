@@ -20,6 +20,12 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    # App\Services\CartServices:
+    #     arguments:
+    #         $requestStack: '@request_stack'
+    #         $productRepository: '@App\Repository\ProductRepository'
+    #         $session: '@session'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     

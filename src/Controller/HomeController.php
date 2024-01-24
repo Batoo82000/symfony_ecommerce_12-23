@@ -2,15 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
 use App\Repository\PagesRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SettingRepository;
 use App\Repository\SlidersRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\CollectionsRepository;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -57,6 +54,14 @@ class HomeController extends AbstractController
         shuffle($collections);
         // array_slice extrait dans ce cas précis les 2 premiers éléments du tableau $collections, le but étant d'afficher que 2 éléments dans ma vue twig
         $selectedCollections = array_slice($collections, 0, 2);
+
+        // Utilise le repository pour récupérer les données qui sont à true de isisMega.
+        $collectionsMega = $collectionsRepository->findBy(['isMega' => true]);
+        // shuffle me permet de mélanger les données du tableau $collections
+        shuffle($collectionsMega);
+        // Stocke collections dans la session sous la clé 'collections'.
+        $session->set("isCollectionsMega", $collectionsMega);
+
         
         // Utilise le repository pour récupérer les données qui sont à true de isHeader et isFooter.
         $pagesHeader = $pagesRepository->findBy(['isHeader' => true]);
@@ -83,11 +88,33 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'sliders' => $sliders,
-            'collections' => $selectedCollections,
+            'collections' => $collections,
+            'selectedCollections' => $selectedCollections,
             'productsBestSeller' => $productsBestSeller,
             'productsNewArrival'=> $productsNewArrival,
             'productsFeatured' => $productsFeatured,
             'productsSpecialOffer' => $productsSpecialOffer,
         ]);
+    }
+    #[Route('/product/{slug}', name: 'app_product_by_slug')]
+    public function showProduct(string $slug)
+    {
+        $product = $this->productRepository->findOneBy(['slug'=> $slug]);
+        if(!$product){
+            return $this->redirectToRoute('app_error');
+        }
+        return $this->render('product/show_product_by_slug.html.twig', [
+            'product' => $product,
+        ]);
+        
+    }
+    #[Route('/error', name: 'app_error')]
+    public function errorPage()
+    {
+
+        return $this->render('pages/not-found-404.html.twig', [
+            'controller_name' => 'PagesController',
+        ]);
+        
     }
 }
