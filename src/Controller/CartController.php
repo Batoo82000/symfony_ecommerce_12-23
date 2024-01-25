@@ -32,15 +32,19 @@ class CartController extends AbstractController
     #[Route('/cart/add/{productId}/{count}', name: 'app_add_to_cart')]
     public function addToCart(string $productId, $count = 1): Response
     {
-        $this->cartService->addToCart($productId,$count);
-        return $this->redirectToRoute("app_cart");
+        $this->cartService->addToCart($productId, $count);
+        $cart = $this->cartService->getCartDetails();
+
+        return $this->json($cart);
         
     }
     #[Route('/cart/remove/{productId}/{count}', name: 'app_remove_to_cart')]
     public function removeToCart(string $productId, $count = 1): Response
     {
         $this->cartService->removeToCart($productId,$count);
-        return $this->redirectToRoute("app_cart");
+        $cart = $this->cartService->getCartDetails();
+
+        return $this->json($cart);
         
     }
 }

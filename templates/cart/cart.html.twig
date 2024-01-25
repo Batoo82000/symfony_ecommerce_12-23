@@ -26,7 +26,7 @@
 								</thead>
 								<tbody>
 
-									{% for item in cart.items %}
+									{# {% for item in cart.items %}
 
 										<tr>
 											<td class="product-thumbnail">
@@ -59,7 +59,7 @@
 											</td>
 										</tr>
 
-									{% endfor %}
+									{% endfor %} #}
 
 								</tbody>
 							</table>
@@ -87,16 +87,16 @@
 									<tbody>
 										<tr>
 											<td class="cart_total_label">Cart Subtotal</td>
-											<td class="cart_total_amount">{{ (cart.sub_total/100) | format_currency("EUR")}}</td>
+											<td class="cart_total_amount">{{ cart.sub_total/100 }}</td>
 										</tr>
 										<tr>
 											<td class="cart_total_label">Shipping</td>
-											<td class="cart_total_amount">Free Shipping</td>
+											<td class="cart_total_shipment">Free Shipping</td>
 										</tr>
 										<tr>
 											<td class="cart_total_label">Total</td>
 											<td class="cart_total_amount">
-												<strong>{{ (cart.sub_total/100) | format_currency("EUR")}}</strong>
+												<strong>{{ cart.sub_total/100 }}</strong>
 											</td>
 										</tr>
 									</tbody>
@@ -111,15 +111,4 @@
 		</div>
 	</div>
 
-{% endblock %}
-
-{% block javascripts %}
-	<script>
-    window.onload = () => {
-        const mainContent = document.querySelector(".main_content")
-
-        const cart = mainContent.dataset.cart
-		console.log(cart)
-    }
-	</script>
 {% endblock %}
